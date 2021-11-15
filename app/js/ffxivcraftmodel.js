@@ -1333,6 +1333,7 @@ function hqPercentFromQuality(qualityPercent) {
 }
 
 function evalSeq(individual, mySynth, penaltyWeight) {
+	console.log("Well, it parsed");
     penaltyWeight = penaltyWeight!== undefined ? penaltyWeight : 10000;
 
     var startState = NewStateFromSynth(mySynth);
