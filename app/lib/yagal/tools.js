@@ -240,6 +240,7 @@ var yagal_tools = (function() {
     randomMutation: randomMutation,
     mutSwap: mutSwap,
     mutReverse: mutReverse,
+    mutRemove: mutRemove,
     sanityCheck: sanityCheck,
     HallOfFame: HallOfFame,
   };
