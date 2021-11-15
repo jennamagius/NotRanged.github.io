@@ -10,6 +10,7 @@ ALGORITHMS['eaComplex'] = {
     toolbox.register("mutate3", yagal_tools.mutReverse);
     toolbox.register("mutate4", yagl_tools.mutRemove);
     toolbox.register("mutate", yagal_tools.randomMutation, [toolbox.mutate1, toolbox.mutate2, toolbox.mutate3, toolbox.mutate4]);
+    console.log("Registered mutates");
     toolbox.register("selectParents", yagal_tools.selTournament, 7);
     toolbox.register("selectOffspring", yagal_tools.selBest);
     toolbox.register("selectSurvivors", yagal_tools.selBest);
