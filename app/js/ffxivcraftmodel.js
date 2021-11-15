@@ -1389,18 +1389,9 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     //fitness -= result.cpState*0.5 // Penalizes wasted CP
     fitnessProg += result.progressState;
     
-    try {	
-    if (result.qualityState < result.synth.recipe.maxQuality) {
-	    fitness -= 5000000;
-    } else if (chk.progressOK && chk.durabilityOK) {
-	    var number_of_steps_weve_saved = 100 - individual.length;
-	    fitness += 100000 * number_of_steps_weve_saved;
-    }
-    } catch(e) {
-	    console.log("Failure", e);
-    }
+    var qualityOk = result.qualityState < result.synth.recipe.maxQuality;
 
-    return [chk.progressOk, chk.durabilityOk, individual.length, fitness, fitnessProg, result.cpState];
+    return [qualityOk, chk.progressOk, individual.length];
 }
 
 evalSeq.weights = [1.0, 1.0, 1.0, -1.0];
