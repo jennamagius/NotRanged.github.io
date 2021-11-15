@@ -1389,12 +1389,12 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     //fitness -= result.cpState*0.5 // Penalizes wasted CP
     fitnessProg += result.progressState;
     
-    var qualityOk = result.qualityState < result.synth.recipe.maxQuality;
+    var qualityOk = result.qualityState >= result.synth.recipe.maxQuality;
 
     return [qualityOk, chk.progressOk, individual.length];
 }
 
-evalSeq.weights = [1.0, 1.0, 1.0, -1.0];
+evalSeq.weights = [1.0, 1.0, 1.0];
 
 function heuristicSequenceBuilder(synth) {
     var sequence = [];
