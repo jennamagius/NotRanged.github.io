@@ -1391,10 +1391,10 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     
     var qualityOk = result.qualityState >= result.synth.recipe.maxQuality;
 
-    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length];
+    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length result.qualityState];
 }
 
-evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0];
+evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
 
 function heuristicSequenceBuilder(synth) {
     var sequence = [];
