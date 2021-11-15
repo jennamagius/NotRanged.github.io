@@ -1391,7 +1391,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     
     var qualityOk = result.qualityState >= result.synth.recipe.maxQuality;
 
-    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length result.qualityState];
+    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length, result.qualityState];
 }
 
 evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
