@@ -1350,7 +1350,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     // Check for feasibility violations
     var chk = result.checkViolations();
     try {	
-    if (result.state.qualityState < result.synth.recipe.maxQuality) {
+    if (result.qualityState < result.synth.recipe.maxQuality) {
 	    fitness -= 50000;
     } else if (chk.progressOK && chk.durabilityOK) {
 	    var number_of_steps_weve_saved = 50 - result.step;
