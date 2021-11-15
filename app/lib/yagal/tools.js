@@ -127,7 +127,12 @@ var yagal_tools = (function() {
     sanityCheck(individual);
     return [individual];
   }
-
+  
+  function mutRemove(individual) {
+    console.log("Hi");
+    return [individual];
+  }
+  
   function mutSwap(individual) {
     if (individual.length >= 2) {
       var i = randInt(individual.length - 1);
