@@ -1400,7 +1400,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
 	    console.log("Failure", e);
     }
 
-    return [fitness, fitnessProg, result.cpState, individual.length];
+    return [chk.progressOk, chk.durabilityOk, individual.length, fitness, fitnessProg, result.cpState];
 }
 
 evalSeq.weights = [1.0, 1.0, 1.0, -1.0];
