@@ -130,6 +130,8 @@ var yagal_tools = (function() {
   
   function mutRemove(individual) {
     console.log("Hi");
+    var toRemove = randInt(individual.length);
+    individual.splice(toRemove,1);
     return [individual];
   }
   
