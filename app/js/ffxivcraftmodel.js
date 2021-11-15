@@ -1349,16 +1349,6 @@ function evalSeq(individual, mySynth, penaltyWeight) {
 
     // Check for feasibility violations
     var chk = result.checkViolations();
-    try {	
-    if (result.qualityState < result.synth.recipe.maxQuality) {
-	    fitness -= 50000;
-    } else if (chk.progressOK && chk.durabilityOK) {
-	    var number_of_steps_weve_saved = 50 - result.step;
-	    fitness += 1000 * number_of_steps_weve_saved;
-    }
-    } catch(e) {
-	    console.log("Failure", e);
-    }
 
     if (!chk.durabilityOk) {
        penalties += Math.abs(result.durabilityState);
@@ -1398,6 +1388,17 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     fitness -= penaltyWeight * penalties;
     //fitness -= result.cpState*0.5 // Penalizes wasted CP
     fitnessProg += result.progressState;
+    
+    try {	
+    if (result.qualityState < result.synth.recipe.maxQuality) {
+	    fitness += 50000;
+    } else if (chk.progressOK && chk.durabilityOK) {
+	    var number_of_steps_weve_saved = 50 - result.step;
+	    fitness -= 1000 * number_of_steps_weve_saved;
+    }
+    } catch(e) {
+	    console.log("Failure", e);
+    }
 
     return [fitness, fitnessProg, result.cpState, individual.length];
 }
