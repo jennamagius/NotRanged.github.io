@@ -1351,7 +1351,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
 	
     if (result.state.qualityState < result.synth.recipe.maxQuality) {
 	    fitness -= 50_000;
-    } else {
+    } else if (chk.progressOK && chk.durabilityOK) {
 	    var number_of_steps_weve_saved = 50 - result.step;
 	    fitness += 1000 * number_of_steps_weve_saved;
     }
