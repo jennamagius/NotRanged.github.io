@@ -9,6 +9,7 @@
     this.$timeout = $timeout;
 
     this.worker = new Worker('js/solver/worker.js');
+    window.xworker = this.worker;
 
     var self = this,
       worker = this.worker;
