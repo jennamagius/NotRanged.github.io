@@ -30,6 +30,7 @@ self.onmessage = function(e) {
 };
 
 function setupSim(settings) {
+  self.asdfSettings = settings;
   var seed = Math.seed;
   if (typeof settings.seed === 'number') {
     seed = settings.seed;
