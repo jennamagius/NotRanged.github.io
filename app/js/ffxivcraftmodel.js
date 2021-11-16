@@ -1333,7 +1333,73 @@ function hqPercentFromQuality(qualityPercent) {
 }
 
 function evalSeq(individual, mySynth, penaltyWeight) {
-	console.log("Well, it parsed");
+    penaltyWeight = penaltyWeight!== undefined ? penaltyWeight : 10000;
+
+    var startState = NewStateFromSynth(mySynth);
+
+    var result = simSynth(individual, startState, false, false, false);
+    var penalties = 0;
+    var fitness = 0;
+    var fitnessProg = 0;
+
+    // Sum the constraint violations
+    // experiment: wastedactions change
+    penalties += result.wastedActions / 20;
+
+    // Check for feasibility violations
+    var chk = result.checkViolations();
+
+    if (!chk.durabilityOk) {
+       penalties += Math.abs(result.durabilityState);
+    }
+
+    if (!chk.progressOk) {
+        penalties += Math.abs(mySynth.recipe.difficulty - Math.min(result.progressState, mySynth.recipe.difficulty));
+    }
+
+    if (!chk.cpOk) {
+        penalties += Math.abs(result.cpState);
+    }
+
+    if (result.trickUses > mySynth.maxTrickUses) {
+        penalties += Math.abs(result.trickUses - mySynth.maxTrickUses);
+    }
+
+    if (result.reliability < mySynth.reliabilityIndex) {
+        penalties += Math.abs(mySynth.reliabilityIndex - result.reliability);
+    }
+
+    if (mySynth.maxLength > 0) {
+        var maxActionsExceeded = individual.length - mySynth.maxLength;
+        if (maxActionsExceeded > 0) {
+            penalties += 0.1 * maxActionsExceeded;
+        }
+    }
+
+    if (mySynth.solverVars.solveForCompletion) {
+        fitness += result.cpState * mySynth.solverVars.remainderCPFitnessValue;
+        fitness += result.durabilityState * mySynth.solverVars.remainderDurFitnessValue;
+    }
+    else {
+        fitness += result.qualityState;
+    }
+    
+    fitness -= penaltyWeight * penalties;
+    //fitness -= result.cpState*0.5 // Penalizes wasted CP
+    fitnessProg += result.progressState;
+
+    return [fitness, fitnessProg, result.cpState, -individual.length];
+}
+
+function evalSeq(individual, mySynth, penaltyWeight) {
+	if (window.short_style_flag) {
+		return evalSeqShort(individual, mySynth, penaltyWeight);
+	} else {
+		return evalSeqLong(individual, mysynth, penaltyWeight);
+	}
+}
+
+function evalSeqShort(individual, mySynth, penaltyWeight) {
     penaltyWeight = penaltyWeight!== undefined ? penaltyWeight : 10000;
 
     var startState = NewStateFromSynth(mySynth);
