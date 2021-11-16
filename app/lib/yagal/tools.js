@@ -129,8 +129,10 @@ var yagal_tools = (function() {
   }
   
   function mutRemove(individual) {
-    var toRemove = randInt(individual.length);
-    individual.splice(toRemove,1);
+    if (self.short_style_flag) {
+      var toRemove = randInt(individual.length);
+      individual.splice(toRemove,1);
+    }
     return [individual];
   }
   
