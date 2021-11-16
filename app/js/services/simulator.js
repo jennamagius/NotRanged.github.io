@@ -9,6 +9,7 @@
     this.$timeout = $timeout;
 
     var worker = new Worker('js/simulationworker.js');
+    window.simulationworker = worker;
 
     var self = this;
     worker.onmessage = function (e) {
