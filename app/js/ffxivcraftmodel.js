@@ -1332,7 +1332,7 @@ function hqPercentFromQuality(qualityPercent) {
     return hqPercent;
 }
 
-function evalSeq(individual, mySynth, penaltyWeight) {
+function evalSeqLong(individual, mySynth, penaltyWeight) {
     penaltyWeight = penaltyWeight!== undefined ? penaltyWeight : 10000;
 
     var startState = NewStateFromSynth(mySynth);
@@ -1389,14 +1389,6 @@ function evalSeq(individual, mySynth, penaltyWeight) {
     fitnessProg += result.progressState;
 
     return [fitness, fitnessProg, result.cpState, -individual.length];
-}
-
-function evalSeq(individual, mySynth, penaltyWeight) {
-	if (window.short_style_flag) {
-		return evalSeqShort(individual, mySynth, penaltyWeight);
-	} else {
-		return evalSeqLong(individual, mysynth, penaltyWeight);
-	}
 }
 
 function evalSeqShort(individual, mySynth, penaltyWeight) {
@@ -1458,6 +1450,14 @@ function evalSeqShort(individual, mySynth, penaltyWeight) {
     var qualityOk = result.qualityState >= result.synth.recipe.maxQuality;
 
     return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length, result.qualityState];
+}
+
+function evalSeq(individual, mySynth, penaltyWeight) {
+	if (window.short_style_flag) {
+		return evalSeqShort(individual, mySynth, penaltyWeight);
+	} else {
+		return evalSeqLong(individual, mysynth, penaltyWeight);
+	}
 }
 
 evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
