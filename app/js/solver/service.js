@@ -48,6 +48,7 @@
   SolverService.$inject = ['$timeout'];
 
   SolverService.prototype.start = function(settings, progress, success, error) {
+    settings.shortStyle = window.short_style_flag;
     if (settings.recipe.startQuality === undefined) {
       settings.recipe = angular.copy(settings.recipe);
       settings.recipe.startQuality = 0;
