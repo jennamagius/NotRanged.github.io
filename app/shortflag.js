@@ -1,6 +1,8 @@
 document.addEventListener("click", function() {
   try {
-    window.short_style_flag = document.querySelector("#short-style-checkbox").checked;
+    let checkbox = document.querySelector("#short-style-checkbox");
+    window.xworker.short_style_flag = checkbox.checked;
+    window.simulationworker.short_style_flag = checkbox.checked; 
   } catch (e) {
     console.log(e);
   }
