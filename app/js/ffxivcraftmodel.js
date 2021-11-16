@@ -1453,7 +1453,7 @@ function evalSeqShort(individual, mySynth, penaltyWeight) {
 }
 
 function evalSeq(individual, mySynth, penaltyWeight) {
-	if (window.short_style_flag) {
+	if (self.short_style_flag) {
 		return evalSeqShort(individual, mySynth, penaltyWeight);
 	} else {
 		return evalSeqLong(individual, mysynth, penaltyWeight);
