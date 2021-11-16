@@ -1460,7 +1460,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
 	}
 }
 
-evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
 
 function heuristicSequenceBuilder(synth) {
     var sequence = [];
