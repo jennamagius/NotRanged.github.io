@@ -44,6 +44,7 @@ self.onmessage = function(e) {
 };
 
 function start(settings) {
+  self.asdfSettings = settings;
   var logOutput = new LogOutput();
 
   var seed = Math.seed;
