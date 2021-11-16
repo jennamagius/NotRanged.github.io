@@ -1388,7 +1388,7 @@ function evalSeqLong(individual, mySynth, penaltyWeight) {
     //fitness -= result.cpState*0.5 // Penalizes wasted CP
     fitnessProg += result.progressState;
 
-    return [fitness, fitnessProg, result.cpState, -individual.length, 0.0, 0.0];
+    return [fitness, fitnessProg, result.cpState, -individual.length, 0.0, 0.0, 0.0];
 }
 
 function evalSeqShort(individual, mySynth, penaltyWeight) {
@@ -1449,7 +1449,7 @@ function evalSeqShort(individual, mySynth, penaltyWeight) {
     
     var qualityOk = result.qualityState >= result.synth.recipe.maxQuality;
 
-    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length, result.qualityState];
+    return [chk.cpOk, chk.durabilityOk, qualityOk, chk.progressOk, -individual.length, result.qualityState, result.progressState];
 }
 
 function evalSeq(individual, mySynth, penaltyWeight) {
@@ -1460,7 +1460,7 @@ function evalSeq(individual, mySynth, penaltyWeight) {
 	}
 }
 
-evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+evalSeq.weights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
 
 function heuristicSequenceBuilder(synth) {
     var sequence = [];
